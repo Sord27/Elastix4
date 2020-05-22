@@ -4,7 +4,7 @@
 ## Instalation
 To start out, ssh into your host. Then at the command, download the install scripts. If you do not have wget, install it by `yum -y install wget`, then you will just need to run this:
 
-	wget -O Elastix4onCentos7vz.tar.gz --no-check-certificate https://github.com/Sord27/Elastix4/archive/master
+	wget -O Elastix4onCentos7vz.tar.gz --no-check-certificate https://github.com/Sord27/Elastix4/archive/master.zip
 	tar zxvf Elastix4onCentos7vz.tar.gz --strip-components=1 
 
 If you are using the Digital Ocean 512 MB Memory / 20 GB Disk / NYC3 - CentOS 7.2 x64 setup, you will want to create a Swapfile, or else your memory will run out, and the database will crash. to do this, run `./create-swapfile.sh` 
