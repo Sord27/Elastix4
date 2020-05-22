@@ -11,7 +11,7 @@ fi
 if [ -e Elastix-4.0.74-Stable-x86_64-bin-10Feb2016.iso ]; then
 	echo "ISO is already avalible. Skipping download"
 else
-	wget http://downloads.sourceforge.net/project/elastix/Elastix%20PBX%20Appliance%20Software/4.0.0/Elastix-4.0.74-Stable-x86_64-bin-10Feb2016.iso
+	wget https://sourceforge.net/projects/vaak/files/Elastix/4/Elastix-4.0.74-Stable-x86_64-bin-10Feb2016.iso
 fi
 if [ -e /etc/yum.repos.d/commercial-addons.repo ]; then
 	echo "Seems to have an Install attemt that failed. Clean up yum"
@@ -42,11 +42,11 @@ enabled=1
 #Add Online, so it is up to date from the start
 echo '[commercial-addons]
 name=Commercial-Addons RPM Repository for Elastix
-mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=commercial_addons
-#baseurl=http://repo.elastix.org/elastix/4/commercial_addons/$basearch/
-gpgcheck=1
+#mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=commercial_addons
+baseurl=http://elastix.adaptixnetworks.com/4/commercial_addons/$basearch/
+gpgcheck=0
 enabled=1
-gpgkey=http://repo.elastix.org/elastix/RPM-GPG-KEY-Elastix
+gpgkey=http://elastix.adaptixnetworks.com/RPM-GPG-KEY-Elastix
 
 [LowayResearch]
 name=Loway Research Yum Repository
@@ -54,45 +54,45 @@ baseurl=http://yum.loway.ch/RPMS
 gpgcheck=0
 enabled=1
 
-[iperfex]
-name=IPERFEX RPMs repository
-baseurl=http://packages.iperfex.com/centos/$releasever/$basearch/
-gpgkey=http://packages.iperfex.com/RPM-GPG-KEY-iperfex-repository
-enabled=1
-gpgcheck=1
-' > /etc/yum.repos.d/commercial-addons.repo 
+#[iperfex]
+#name=IPERFEX RPMs repository
+#baseurl=http://packages.iperfex.com/centos/$releasever/$basearch/
+#gpgkey=http://packages.iperfex.com/RPM-GPG-KEY-iperfex-repository
+e#nabled=1
+#gpgcheck=1
+#' > /etc/yum.repos.d/commercial-addons.repo 
 
 echo '[elastix-base]
 name=Base RPM Repository for Elastix 
-mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=base
-#baseurl=http://repo.elastix.org/elastix/4/base/$basearch/
-gpgcheck=1
+#mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=base
+baseurl=http://elastix.adaptixnetworks.com/4/base/$basearch/
+gpgcheck=0
 enabled=1
-gpgkey=http://repo.elastix.org/elastix/RPM-GPG-KEY-Elastix
+gpgkey=http://elastix.adaptixnetworks.com/RPM-GPG-KEY-Elastix
 
 [elastix-updates]
 name=Updates RPM Repository for Elastix 
-mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=updates
-#baseurl=http://repo.elastix.org/elastix/4/updates/$basearch/
-gpgcheck=1
+#mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=updates
+baseurl=http://elastix.adaptixnetworks.com/4/updates/$basearch/
+gpgcheck=0
 enabled=1
-gpgkey=http://repo.elastix.org/elastix/RPM-GPG-KEY-Elastix
+gpgkey=http://elastix.adaptixnetworks.com/RPM-GPG-KEY-Elastix
 
 [elastix-beta]
 name=Beta RPM Repository for Elastix 
-mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=beta
-#baseurl=http://repo.elastix.org/elastix/4/beta/$basearch/
-gpgcheck=1
+#mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=beta
+baseurl=http://elastix.adaptixnetworks.com/4/beta/$basearch/
+gpgcheck=0
 enabled=0
-gpgkey=http://repo.elastix.org/elastix/RPM-GPG-KEY-Elastix
+gpgkey=http://elastix.adaptixnetworks.com/RPM-GPG-KEY-Elastix
 
 [elastix-extras]
 name=Extras RPM Repository for Elastix 
-mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=extras
-#baseurl=http://repo.elastix.org/elastix/4/extras/$basearch/
-gpgcheck=1
+#mirrorlist=http://mirror.elastix.org/?release=4&arch=$basearch&repo=extras
+baseurl=http://elastix.adaptixnetworks.com/4/extras/$basearch/
+gpgcheck=0
 enabled=1
-gpgkey=http://repo.elastix.org/elastix/RPM-GPG-KEY-Elastix
+gpgkey=http://elastix.adaptixnetworks.com/RPM-GPG-KEY-Elastix
 ' > /etc/yum.repos.d/elastix.repo 
 
 #Now we do the installation
@@ -108,7 +108,7 @@ yum -y install asterisk
 yum -y install elastix
 #Run a 2nd time in case it missed something
 yum -y --nogpg install $(cat inst2.txt)
-yum -clean all
+yum clean all
 yum -y update 
 
 #Shut off SElinux and Firewall. Be sure to configure it in Elastix!
